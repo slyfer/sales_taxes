@@ -13,7 +13,7 @@
 	</properties>
 
 	<build>
-		<finalName>${artifactId}</finalName>
+		<finalName>${project.artifactId}</finalName>
 		<defaultGoal>package</defaultGoal>
 
 		<plugins>
