@@ -21,7 +21,7 @@ import sales.taxes.model.Item;
 public class ItemTest {
 
     /**
-     * Verifies constructor
+     * Verifies constructor, skipping taxes
      */
     @Test
     public void testConstructor() {
