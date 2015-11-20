@@ -1,7 +1,7 @@
 /**
  *
  */
-package sales_taxes;
+package sales.taxes.model;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,8 +12,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import sales.taxes.model.Item;
-
 /**
  * Test class for {@link Item}, only check taxes rounding
  *
@@ -23,7 +21,7 @@ import sales.taxes.model.Item;
 @RunWith(Parameterized.class)
 public class ItemTaxesRoundingTest {
 
-    @Parameters(name = "{index}: price={0}, taxable={1}, imported={2}, expectedTaxes={3} ")
+    @Parameters(name = "{index}: price={0}, taxable={1}, imported={2}, expectedTaxes={3}")
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][] {
 
@@ -33,17 +31,20 @@ public class ItemTaxesRoundingTest {
                 // simple, no rounding needed
                 { 10.0, false, true, 0.5 },
 
-                // down rounding (2.459 -> 2.45)
-                { 24.59, true, false, 2.45 },
+                // rounding 2.459 -> 2.5
+                { 24.59, true, false, 2.5 },
 
-                // up rounding (2.440 -> 2.45)
+                // rounding 2.440 -> 2.45
                 { 24.40, true, false, 2.45 },
 
-                // down rounding (3.66)
-                { 24.40, true, true, 3.65 },
+                // rounding 3.66 -> 3.70
+                { 24.40, true, true, 3.70 },
 
-                // up rounding 4.9995 -> 5.0)
-                { 33.33, true, true, 5.0 }
+                // rounding 4.9995 -> 5.0
+                { 33.33, true, true, 5.0 },
+
+                // rounding 0.5625 -> 0.6
+                { 11.25, false, true, 0.6 }
 
         });
     }
@@ -74,7 +75,7 @@ public class ItemTaxesRoundingTest {
 
         final Item item = new Item(name, price, taxable, imported);
 
-        Assert.assertEquals(expectedTaxes, item.getTaxes(), 0.0);
+        Assert.assertEquals(expectedTaxes, item.getTaxes(), 0.001);
     }
 
 }

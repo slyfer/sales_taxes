@@ -1,7 +1,7 @@
 /**
  *
  */
-package sales_taxes;
+package sales.taxes.model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -9,8 +9,6 @@ import java.io.UnsupportedEncodingException;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import sales.taxes.model.Item;
 
 /**
  * Test class for {@link Item}
@@ -33,7 +31,7 @@ public class ItemTest {
         final Item item = new Item(name, price, taxable, imported);
 
         Assert.assertEquals(name, item.getName());
-        Assert.assertEquals(price, item.getPrice(), 0.0);
+        Assert.assertEquals(price, item.getPrice(), 0.001);
         Assert.assertEquals(taxable, item.isTaxable());
         Assert.assertEquals(imported, item.isImported());
 
@@ -57,7 +55,7 @@ public class ItemTest {
 
             final Item item = new Item(name, price, taxable, imported);
 
-            Assert.assertEquals(0.0, item.getTaxes(), 0.0);
+            Assert.assertEquals(0.0, item.getTaxes(), 0.001);
         }
 
         // imported
@@ -67,7 +65,7 @@ public class ItemTest {
 
             final Item item = new Item(name, price, taxable, imported);
 
-            Assert.assertEquals(0.5, item.getTaxes(), 0.0);
+            Assert.assertEquals(0.5, item.getTaxes(), 0.001);
         }
     }
 
@@ -88,7 +86,7 @@ public class ItemTest {
 
             final Item item = new Item(name, price, taxable, imported);
 
-            Assert.assertEquals(1.0, item.getTaxes(), 0.0);
+            Assert.assertEquals(1.0, item.getTaxes(), 0.001);
         }
 
         // imported
@@ -98,7 +96,7 @@ public class ItemTest {
 
             final Item item = new Item(name, price, taxable, imported);
 
-            Assert.assertEquals(1.5, item.getTaxes(), 0.0);
+            Assert.assertEquals(1.5, item.getTaxes(), 0.001);
         }
 
     }

@@ -6,7 +6,6 @@ package sales.taxes.model;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 /**
@@ -60,7 +59,7 @@ public class Item {
     }
 
     /**
-     * Prints description of item to given stream
+     * Prints description of item to given stream and close it
      *
      * @param outputStream
      *
@@ -72,7 +71,6 @@ public class Item {
         final NumberFormat numberFormat = NumberFormat.getInstance();
         numberFormat.setMaximumFractionDigits(2);
         numberFormat.setMinimumFractionDigits(2);
-        numberFormat.setRoundingMode(RoundingMode.CEILING);
 
         String description = imported ? "imported " : "";
 
@@ -125,10 +123,12 @@ public class Item {
 
         double t = 0;
 
+        // 10%
         if (taxable) {
             t = price * 0.10;
         }
 
+        // 5%
         if (imported) {
             t += price * 0.05;
         }
@@ -144,7 +144,7 @@ public class Item {
      */
     private double round(final double toRound) {
 
-        return Math.round(toRound * 20.0) / 20.0;
+        return 0.05 * Math.ceil(toRound / 0.05);
 
     }
 
